@@ -1,0 +1,126 @@
+col_bg: &col_bg 0B151D99
+col_fg: &col_fg C5C8C6FF
+col_active: &col_active AC8AACFF
+col_empty: &col_empty 404B66FF
+col_occupied: &col_occupied C6D2EDFF
+col_red: &col_red BD6B64FF
+col_yellow: &col_yellow C7B079FF
+col_blue: &col_blue 6A9FB8FF
+col_magenta: &col_magenta A6729FFF
+col_green: &col_green 5CB574FF
+
+main_font: &main_font mononoki Nerd Font:style=Bold:pixelsize=15 #17
+title_font: &title_font mononoki Nerd Font:style=Bold:pixelsize=15
+icon_font: &icon_font mononoki Nerd Font:style=Bold:pixelsize=15 #19
+
+bar:
+  height: 35
+  location: top
+  layer: bottom
+  spacing: 5
+  background: *col_bg
+  foreground: *col_fg
+  margin: 7
+
+  font: *main_font
+  
+  center:
+    - wlr-workspace:
+        workspace-count: 6
+        anchors:
+          - string: &name { string: { text: "" } }
+          - base: &wlr_ws_base
+              margin: 10
+              default: *name
+              conditions:
+                id == 1: { string: { text: "" } }
+                id == 2: { string: { text: "" } }
+                id == 3: { string: { text: "" } }
+                id == 4: { string: { text: "" } }
+                id == 5: { string: { text: "" } }
+                id == 6: { string: { text: "" } }
+        content:
+          map:
+            conditions:
+              state == focused:
+                map:
+                  <<: *wlr_ws_base
+                  foreground: *col_active
+              state == empty: 
+                map:
+                  <<: *wlr_ws_base
+                  foreground: *col_empty
+              state == active: 
+                map:
+                  <<: *wlr_ws_base
+                  foreground: *col_occupied
+  #center:
+  #  - script:
+  #      path: /home/mrkcee/.config/yambar/scripts/hyprland_window_title.zsh
+  #      poll-interval: 1
+  #      content:
+  #        string:
+  #          max: 75
+  #          text: "  {window}  "
+  #          font: *title_font
+  #          foreground: *col_fg
+  #           deco:
+              #stack:
+              #  - background:
+              #      color: *col_blue
+              #  - border:
+              #      size: 7
+              #      color: *col_bg
+  #right:
+    - script:
+        path: /home/mrkcee/.config/yambar/scripts/audio.zsh
+        content:
+          map:
+            on-click: "pactl set-sink-mute @DEFAULT_SINK@ toggle"
+            conditions:
+              muted:
+                string:
+                  margin: 3
+                  text: " "
+                  font: *icon_font
+              ~muted:
+                string:
+                  margin: 3
+                  text: " {volume}%"
+                  font: *icon_font
+
+    - network:
+        name: wlp38s0
+        poll-interval: 15
+        content:
+          map:
+            on-click: "footclient --title=nmtui -e nmtui"
+            conditions:
+              ~carrier:
+                string:
+                  margin: 3
+                  text: "󰤮 "
+                  font: *icon_font
+                  foreground: *col_red
+              carrier:
+                string:
+                  margin: 3
+                  text: " "
+                  font: *icon_font    
+    - clock:
+        time-format: "%I:%M %p"
+        date-format: "%B %d"
+        content:
+          string:
+            margin: 3
+            text: "   {date}    {time}"
+            font: *title_font
+            foreground: *col_occupied
+    - label:
+        content:
+          string:
+            on-click: "footclient --title=powermenu -e /home/mrkcee/.config/yambar/scripts/powermenu.zsh"
+            text: " "
+            font: *icon_font
+            foreground: *col_red
+            margin: 3
