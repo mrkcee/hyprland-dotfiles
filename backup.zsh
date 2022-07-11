@@ -17,5 +17,6 @@ do
 	fi
 	cp -r $HOME/.config/$config .
 done
+rm ./zsh/.zcompdump
 
 echo "Config files have been backed up successfully."
