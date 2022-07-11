@@ -9,9 +9,9 @@ col_blue: &col_blue 6A9FB8FF
 col_magenta: &col_magenta A6729FFF
 col_green: &col_green 5CB574FF
 
-main_font: &main_font mononoki Nerd Font:style=Bold:pixelsize=15 #17
-title_font: &title_font mononoki Nerd Font:style=Bold:pixelsize=15
-icon_font: &icon_font mononoki Nerd Font:style=Bold:pixelsize=15 #19
+main_font: &main_font mononoki Nerd Font:style=Regular:pixelsize=14
+title_font: &title_font mononoki Nerd Font:style=Bold:pixelsize=14
+icon_font: &icon_font mononoki Nerd Font:style=Bold:pixelsize=14
 
 bar:
   height: 35
@@ -32,6 +32,7 @@ bar:
           - base: &wlr_ws_base
               margin: 10
               default: *name
+              font: *icon_font
               conditions:
                 id == 1: { string: { text: "" } }
                 id == 2: { string: { text: "" } }
@@ -82,12 +83,12 @@ bar:
                 string:
                   margin: 3
                   text: " "
-                  font: *icon_font
+                  font: *title_font
               ~muted:
                 string:
                   margin: 3
                   text: " {volume}%"
-                  font: *icon_font
+                  font: *title_font
 
     - network:
         name: wlp38s0
