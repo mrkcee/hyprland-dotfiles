@@ -5,6 +5,7 @@ config_files=(
 	fuzzel
 	hypr
 	mako
+	nvim
 	yambar
 	zsh
 )
