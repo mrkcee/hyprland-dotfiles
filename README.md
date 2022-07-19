@@ -22,7 +22,7 @@ Color theme based on [N3k0Ch4n's awm configs](https://github.com/N3k0Ch4n/dotRic
 
 
 ### tested on:
-- Void Linux x86_64-glibc
+- Void Linux x86_64-glibc / Gentoo Linux x86_64
 - AMD Ryzen 5 3600
 - AMD Radeon RX 5700 XT
 - Single monitor setup
