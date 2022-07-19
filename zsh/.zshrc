@@ -6,14 +6,6 @@ export BROWSER='firefox'
 export EDITOR='nvim'
 
 ##############################
-# Autorun - GNOME Keyring 
-##############################
-if [ -n "$DESKTOP_SESSION" ] || [ -n "$WAYLAND_DISPLAY" ]; then
-  eval $(gnome-keyring-daemon --start)
-  export SSH_AUTH_SOCK
-fi
-
-##############################
 # History
 ##############################
 HISTFILE=~/.zsh_history
@@ -32,8 +24,8 @@ bindkey -v
 ##############################
 # Plugins
 ##############################
-source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
-source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source /usr/share/zsh/site-functions/zsh-autosuggestions.zsh
+source /usr/share/zsh/site-functions/zsh-syntax-highlighting.zsh
 
 ##############################
 # Colors

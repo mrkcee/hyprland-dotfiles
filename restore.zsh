@@ -1,11 +1,13 @@
 #!/bin/zsh -e
 
 config_files=(
+	common_scripts
 	foot
 	fuzzel
 	hypr
 	mako
 	nvim
+	sway
 	yambar
 	zsh
 )
