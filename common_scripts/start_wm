@@ -1,0 +1,2 @@
+source ~/.config/common_scripts/gnome-keyring
+exec Hyprland

@@ -1,4 +1,4 @@
-col_bg: &col_bg 0B151D99
+col_bg: &col_bg 0B151DFF
 col_fg: &col_fg C5C8C6FF
 col_active: &col_active AC8AACFF
 col_empty: &col_empty 404B66FF

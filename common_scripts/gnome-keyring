@@ -1,0 +1,11 @@
+#!/usr/bin/env sh
+
+##############################
+# Autorun - GNOME Keyring 
+##############################
+#if [ -n "$DESKTOP_SESSION" ] || [ -n "$WAYLAND_DISPLAY" ]; then
+eval $(gnome-keyring-daemon --start)
+export SSH_AUTH_SOCK
+export GNOME_KEYRING_CONTROL
+#fi
+
