@@ -6,14 +6,14 @@ if [[ "$?" != "0" ]]; then
 else
   case $selection in
 		1 )
-			notify-send --urgency=normal "System" "Screen lock not implemented." --icon=void-logo-notext
+			notify-send --urgency=normal "System" "Screen lock not implemented." --icon=gentoo
 			;;
 		2 )
-			notify-send --urgency=normal "System" "Reboot initiated." --icon=void-logo-notext
+			notify-send --urgency=normal "System" "Reboot initiated." --icon=gentoo
 			loginctl reboot
 			;;
 		3 )
-			notify-send --urgency=normal "System" "Shutdown initiated." --icon=void-logo-notext
+			notify-send --urgency=normal "System" "Shutdown initiated." --icon=gentoo
 			loginctl poweroff
 			;;
 	esac

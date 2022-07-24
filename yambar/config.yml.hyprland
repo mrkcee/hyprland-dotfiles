@@ -1,4 +1,4 @@
-col_bg: &col_bg 0B151DFF
+col_bg: &col_bg 0B151D99
 col_fg: &col_fg C5C8C6FF
 col_active: &col_active AC8AACFF
 col_empty: &col_empty 404B66FF
@@ -12,7 +12,7 @@ col_green: &col_green 5CB574FF
 main_font: &main_font Iosevka Nerd Font:style=Regular:pixelsize=14
 title_font: &title_font Iosevka Nerd Font:style=Bold:pixelsize=14
 icon_font: &icon_font Iosevka Nerd Font:style=Bold:pixelsize=14
-std_underline: &std_underline {underline: { size: 3, color: *col_active}}
+
 bar:
   monitor: DP-2
   height: 35
@@ -26,41 +26,43 @@ bar:
   font: *main_font
   
   left:
-     - label:
+    - label:
          content:
            string:
              text: "  "
              font: *icon_font
              foreground: *col_occupied
-     - i3:
-        sort: ascending
+  center:
+    - wlr-workspace:
+        workspace-count: 6
         anchors:
-          - string: &i3_common {margin: 5, on-click: "swaymsg --quiet workspace {name}"}
-          - string: &default {<<: *i3_common, text: " {name} ", foreground: *col_fg}
-          - focused: &focused
-              deco: {stack: [ *std_underline]}
-          - invisible: &invisible {foreground: ffffff55}
-          - urgent: &urgent
-              foreground: 000000ff
-              deco: {stack: [background: {color: bc2b3fff}, <<: *std_underline]}
-          #- map: &i3_mode
-          #    tag: mode
-          #    default:
-          #      - string:
-          #          margin: 5
-          #          text: "{mode}"
-          #          deco: {background: {color: cc421dff}}
-          #      - empty: {right-margin: 7}
-          #    values:
-          #      default: {empty: {}}
-        content:
-          "":
-            map:
+          - string: &name { string: { text: "" } }
+          - base: &wlr_ws_base
+              margin: 10
+              default: *name
+              font: *icon_font
               conditions:
-                state == focused:   {string: {<<: [*default, *focused]}}
-                state == unfocused: {string: {<<: *default}}
-                state == invisible: {string: {<<: *default, foreground: *col_occupied}}
-                state == urgent:    {string: {<<: [*default, *urgent]}}
+                id == 1: { string: { text: "" } }
+                id == 2: { string: { text: "" } }
+                id == 3: { string: { text: "" } }
+                id == 4: { string: { text: "" } }
+                id == 5: { string: { text: "" } }
+                id == 6: { string: { text: "" } }
+        content:
+          map:
+            conditions:
+              state == focused:
+                map:
+                  <<: *wlr_ws_base
+                  foreground: *col_active
+              state == empty: 
+                map:
+                  <<: *wlr_ws_base
+                  foreground: *col_empty
+              state == active: 
+                map:
+                  <<: *wlr_ws_base
+                  foreground: *col_occupied
   right:
     - script:
         path: /home/mrkcee/.config/common_scripts/bar/audio.zsh
@@ -89,13 +91,13 @@ bar:
               ~carrier:
                 string:
                   margin: 3
-                  text: "󰤮 "
+                  text: ""
                   font: *icon_font
                   foreground: *col_red
               carrier:
                 string:
                   margin: 3
-                  text: " "
+                  text: ""
                   font: *icon_font    
     - clock:
         time-format: "%I:%M %p"

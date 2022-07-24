@@ -17,7 +17,10 @@ set $menu dmenu_path | dmenu | xargs swaymsg exec --
 ### Output configuration
 #
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
-output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
+#output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
+output * bg ~/wallpapers/lofi-coffee-shop.jpg fill
+output * adaptive_sync on
+
 #
 # Example configuration:
 #
@@ -73,7 +76,7 @@ client.unfocused #404b66 #404b66 #c5c8c6 #404b66
     bindsym $mod+space exec fuzzel --prompt='  ' --terminal='footclient -e' --background=0b151dff --text=c6d2edff --selection-color=ac8aacff --selection-text=0b151dff --border-width=9 --border-color=404b66ff --icon-theme=Papirus-Dark --match-color=bd6b6aff --font='mononoki Nerd Font':size=12 --lines=10 --line-height=20 
 
     # Power Menu
-    bindsym $mod+Shift+p exec footclient --title powermenu -e /home/mrkcee/hyprland-dotfiles/yambar/scripts/powermenu.zsh
+    bindsym $mod+Shift+p exec footclient --title powermenu -e ~/.config/common_scripts/powermenu.zsh
 
     # Drag floating windows by holding down $mod and left mouse button.
     # Resize them with right mouse button + $mod.
@@ -86,7 +89,9 @@ client.unfocused #404b66 #404b66 #c5c8c6 #404b66
     bindsym $mod+Shift+c reload
 
     # Exit sway (logs you out of your Wayland session)
-    bindsym $mod+Shift+q exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'
+    #bindsym $mod+Shift+q exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'
+    bindsym $mod+Shift+q exec swaymsg exit 
+
 #
 # Moving around:
 #
@@ -121,10 +126,10 @@ client.unfocused #404b66 #404b66 #c5c8c6 #404b66
     bindsym $mod+4 workspace number 4
     bindsym $mod+5 workspace number 5
     bindsym $mod+6 workspace number 6
-    bindsym $mod+7 workspace number 7
-    bindsym $mod+8 workspace number 8
-    bindsym $mod+9 workspace number 9
-    bindsym $mod+0 workspace number 10
+    #bindsym $mod+7 workspace number 7
+    #bindsym $mod+8 workspace number 8
+    #bindsym $mod+9 workspace number 9
+    #bindsym $mod+0 workspace number 10
     # Move focused container to workspace
     bindsym $mod+Shift+1 move container to workspace number 1
     bindsym $mod+Shift+2 move container to workspace number 2
@@ -132,10 +137,10 @@ client.unfocused #404b66 #404b66 #c5c8c6 #404b66
     bindsym $mod+Shift+4 move container to workspace number 4
     bindsym $mod+Shift+5 move container to workspace number 5
     bindsym $mod+Shift+6 move container to workspace number 6
-    bindsym $mod+Shift+7 move container to workspace number 7
-    bindsym $mod+Shift+8 move container to workspace number 8
-    bindsym $mod+Shift+9 move container to workspace number 9
-    bindsym $mod+Shift+0 move container to workspace number 10
+    #bindsym $mod+Shift+7 move container to workspace number 7
+    #bindsym $mod+Shift+8 move container to workspace number 8
+    #bindsym $mod+Shift+9 move container to workspace number 9
+    #bindsym $mod+Shift+0 move container to workspace number 10
     # Note: workspaces can have any name you want, not just numbers.
     # We just use 1-10 as the default.
 #
@@ -165,7 +170,13 @@ client.unfocused #404b66 #404b66 #c5c8c6 #404b66
     # Move focus to the parent container
     bindsym $mod+a focus parent
 
+#
+# Screenshots:
+#
+    # Whole screen
     bindsym Print exec grim $HOME/screenshots/$(date +'screenshot_%Y-%m-%d-%H%M%S.png')
+
+	  # Selection
     bindsym Shift+Print exec slurp | grim -g - $HOME/screenshots/$(date +'screenshot_%Y-%m-%d-%H%M%S.png')
 
 #
@@ -228,14 +239,13 @@ for_window {
   [window_type="menu"] floating enable
   [instance="update_installer"] floating enable
   [instance="Steam"] floating enable
-  [window_role="GtkFiileChooserDialog"] move position center
+  [window_role="GtkFileChooserDialog"] move position center
 }
 
 exec gentoo-pipewire-launcher
 exec foot --server
 exec yambar
 exec mako
-exec ~/.config/common_scripts/import-gsettings.zsh
-exec ~/.config/common_scripts/gnome-keyring.zsh
+exec ~/.config/common_scripts/import-gsettings
 
 include /etc/sway/config.d/*
