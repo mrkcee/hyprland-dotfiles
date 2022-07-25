@@ -244,8 +244,8 @@ for_window {
 
 exec gentoo-pipewire-launcher
 exec foot --server
-exec yambar
 exec mako
 exec ~/.config/common_scripts/import-gsettings
+exec yambar
 
 include /etc/sway/config.d/*

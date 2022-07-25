@@ -1,12 +1,13 @@
-#!/bin/zsh -e
+#!/bin/zsh
 
 SLEEPTIME="${1:-1}"
 
 while true; do
-  muted_state=$(pactl get-sink-mute @DEFAULT_SINK@ | sed "s/Mute: //")
-
-	if [[ $muted_state == "no" ]]; then
-	  volume=$(pactl get-sink-volume @DEFAULT_SINK@ | grep % | awk '{print $5}' | sed "s/%//")
+  
+	if ! wpctl get-volume @DEFAULT_AUDIO_SINK@ | grep -q MUTED; then
+	  volume=$(wpctl get-volume @DEFAULT_AUDIO_SINK@ | sed 's/Volume: //')
+		((volume = $volume * 100))
+    volume=${volume%.*}
 
     echo "volume|string|$volume"
 		echo "muted|bool|false"
